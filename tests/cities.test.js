@@ -22,6 +22,8 @@ const SymptomsByPatientsMock = require("./mockData/symptomsByPatientMock");
 const hospitalsMock = require("./mockData/hospitalsMock");
 const updateCity = {name: "Zihron Yakov" , population: 1};
 
+jest.setTimeout(15000);
+
 describe("Cities api tests", () => {
     beforeAll(async () => {
       console.log("process.env.NODE_ENV", process.env.NODE_ENV);

@@ -13,6 +13,9 @@ const {
   Hospitals,
 } = require("../../_cloned-app/models");
 
+jest.setTimeout(15000);
+
+
 //mock data
 const patientsMock = require("./mockData/patientMock");
 const covidTestMock = require("./mockData/covidTestMock");

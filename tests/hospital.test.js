@@ -21,6 +21,8 @@ const symptomMock = require("./mockData/symptomsMock");
 const SymptomsByPatientsMock = require("./mockData/symptomsByPatientMock");
 const hospitalsMock = require("./mockData/hospitalsMock");
 
+jest.setTimeout(15000);
+
 describe("Hospital api tests", () => {
   beforeAll(async () => {
     console.log("process.env.NODE_ENV", process.env.NODE_ENV);
