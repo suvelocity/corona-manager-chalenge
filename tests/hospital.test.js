@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("../app");
+const app = require('../../_cloned-app/app');
 
 //model for bulkCreate
 require("mysql2/node_modules/iconv-lite").encodingExists("foo");
