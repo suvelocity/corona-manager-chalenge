@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< Updated upstream
     "test": "node_modules/.bin/jest --runInBand --detectOpenHandles --forceExit",
+=======
+    "test": "CI=true node_modules/.bin/jest --runInBand --detectOpenHandles --forceExit",
+>>>>>>> Stashed changes
     "start": "node server.js",
     "dev": "nodemon -r dotenv/config server.js"
   },
