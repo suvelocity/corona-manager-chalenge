@@ -59,7 +59,7 @@ describe("Symptoms api tests", () => {
     app.close();
   });
 
-  it("get all symptoms", async () => {
+  it("get all symptoms", async (done) => {
     const { body: symptoms } = await request(app)
       .get("/api/v1/symptoms")
       .expect(200);
@@ -67,16 +67,18 @@ describe("Symptoms api tests", () => {
     expect(symptoms[0].name).toBe(symptomMock[0].name);
     expect(symptoms[1].name).toBe(symptomMock[1].name);
     expect(symptoms[2].name).toBe(symptomMock[2].name);
+    done()
   });
 
-  it("get symptom by id.", async () => {
+  it("get symptom by id.", async (done) => {
     const { body: symptom } = await request(app)
       .get("/api/v1/symptoms/byId/1")
       .expect(200);
     expect(symptom.name).toBe(symptomMock[0].name);
+    done()
   });
 
-  it("create new symptom for patient", async () => {
+  it("create new symptom for patient", async (done) => {
     await request(app)
       .post("/api/v1/symptomsByPatient")
       .send(newSymptomMock)
@@ -85,9 +87,10 @@ describe("Symptoms api tests", () => {
       .get("/api/v1/patients/byId/1")
       .expect(200);
     expect(body.SymptomsByPatients[1].Symptom.name).toBe(symptomMock[1].name);
+    done()
   });
 
-  it("can delete certain symptom for patient", async () => {
+  it("can delete certain symptom for patient", async (done) => {
     await request(app)
       .delete("/api/v1/symptomsByPatient")
       .send(newSymptomMock)
@@ -96,5 +99,6 @@ describe("Symptoms api tests", () => {
       .get("/api/v1/patients/byId/1")
       .expect(200);
     expect(body.SymptomsByPatients.length).toBe(1);
+    done()
   });
 });

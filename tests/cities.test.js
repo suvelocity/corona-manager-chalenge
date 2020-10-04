@@ -56,12 +56,12 @@ describe("Cities api tests", () => {
       app.close();
     });
   
-    it("Can get all cities", async () => {
+    it("Can get all cities", async (done) => {
         const { body } = await request(app).get("/api/v1/cities").expect(200);
-    
         expect(body.length).toBe(2);
+        done()
       });
-    it("Can get a city by id with the number of patients from that city", async () => {
+    it("Can get a city by id with the number of patients from that city", async (done) => {
       const { body } = await request(app).get("/api/v1/cities/byId/2").expect(200);
   
       expect(body.name).toBe(citiesMock[1].name);
@@ -69,8 +69,9 @@ describe("Cities api tests", () => {
       expect(body.Patients[0].name).toBe(patientsMock[0].name);
       expect(body.Patients[1].name).toBe(patientsMock[3].name);
       expect(body.Patients[2].name).toBe(patientsMock[4].name);
+      done()
     });
-    it("Can get the most sick city", async () => {
+    it("Can get the most sick city", async (done) => {
       const { body } = await request(app).get("/api/v1/cities/mostsick").expect(200);
       
       expect(body[0].name).toBe(citiesMock[1].name);
@@ -78,19 +79,22 @@ describe("Cities api tests", () => {
       expect(body[0].Patients[0].name).toBe(patientsMock[0].name);
       expect(body[0].Patients[1].name).toBe(patientsMock[3].name);
       expect(body[0].Patients[2].name).toBe(patientsMock[4].name);
+      done()
     });
 
-    it("Can update a cities name and population", async () => {
+    it("Can update a cities name and population", async (done) => {
         await request(app).put("/api/v1/cities/1").send(updateCity).expect(200);
         const { body } = await request(app).get("/api/v1/cities/byId/1");
         expect(body.name).toBe(updateCity.name);
         expect(body.population).toBe(1);
+        done()
     });
 
-    it("Can delete a city by id", async () => {
+    it("Can delete a city by id", async (done) => {
         await request(app).delete("/api/v1/cities/1");
         const { body } = await request(app).get("/api/v1/cities");
         expect(body.length).toBe(1);
+        done()
     });
   });
   

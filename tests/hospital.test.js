@@ -55,24 +55,27 @@ describe("Hospital api tests", () => {
     app.close();
   });
 
-  it("GET all hospitals with their capacity (maxCapacity), number of respirator (respiratorAmount)", async () => {
+  it("GET all hospitals with their capacity (maxCapacity), number of respirator (respiratorAmount)", async (done) => {
     const { body } = await request(app).get("/api/v1/hospitals").expect(200);
 
     expect(body.length).toBe(2);
     expect(body[0].name).toBe(hospitalsMock[0].name);
     expect(body[1].maxCapacity).toBe(15);
     expect(body[1].respiratorAmount).toBe(5);
+    done()
   });
 
-  it("GET Hospital by id", async () => {
+  it("GET Hospital by id", async (done) => {
     const { body } = await request(app).get("/api/v1/hospitals/byId/1").expect(200);
     expect(body.name).toBe(hospitalsMock[0].name);
+    done()
   });
 
-  it("GET all the hospitals that need to bring more respirator machines (less than five machines that are available in the hospital)", async () => {
+  it("GET all the hospitals that need to bring more respirator machines (less than five machines that are available in the hospital)", async (done) => {
     const { body } = await request(app).get("/api/v1/hospitals/respirator_luck").expect(200);
     expect(body.length).toBe(1);
     expect(body[0].name).toBe(hospitalsMock[1].name);
+    done()
   });
 });
 

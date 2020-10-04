@@ -60,28 +60,32 @@ describe("Covid test api tests", () => {
     app.close();
   });
 
-it("Count all the covid tests by results", async () => {
+it("Count all the covid tests by results", async (done) => {
 const { body : positiveTests} = await request(app).get("/api/v1/covidtests/test-results/1").expect(200);
 expect(positiveTests.count).toBe(3);
 const { body : negativeTests}  = await request(app).get("/api/v1/covidtests/test-results/0").expect(200);
 expect(negativeTests.count).toBe(2);
+done()
 });
 
-it("Can get all the tests by patient id", async () => {
+it("Can get all the tests by patient id", async (done) => {
   const { body } = await request(app).get("/api/v1/covidtests/1").expect(200);
   expect(body.id).toBe(1);
   expect(body.isSick).toBe(true);
+  done()
 });
 
-it("can update the covid test result by test id", async () => {
+it("can update the covid test result by test id", async (done) => {
   const { body : updated} = await request(app).put("/api/v1/covidtests/1").send(testUpdate).expect(200);
   const { body } = await request(app).get("/api/v1/covidtests/1")
   expect(body.isSick).toBe(testUpdate.isSick)
+  done()
 })
 
-it("Can delete a covid test by test id", async () => {
+it("Can delete a covid test by test id", async (done) => {
   await request(app).delete("/api/v1/covidtests/1").expect(200);
   const { body } = await request(app).get("/api/v1/covidtests");
   expect(body.length).toBe(4);
+  done()
 });
 });
