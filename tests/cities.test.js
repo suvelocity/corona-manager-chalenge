@@ -11,7 +11,7 @@ const {
   SymptomsByPatients,
   Cities,
   Hospitals,
-} = require("../models");
+} = require("../../_cloned-app/models");
 
 //mock data
 const patientsMock = require("./mockData/patientMock");
